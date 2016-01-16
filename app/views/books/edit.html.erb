@@ -4,13 +4,21 @@
 
 		<h1>Edit Book</h1>
 
-		<%= simple_form_for @book, :html => { :multipart => true } do |f| %>
-			<%= f.select :category_id, @categories %>
-			<%= f.file_field :book_img %>
-			<%= f.input :title, label: "Book Title" %>
-			<%= f.input :description %>
-			<%= f.input :author %>
-			<%= f.button :submit, :class => "btn-custom2" %>
+		<% if @book.user_id == current_user.id %>
+
+			<%= simple_form_for @book, :html => { :multipart => true } do |f| %>
+				<%= f.select :category_id, @categories %>
+				<%= f.file_field :book_img %>
+				<%= f.input :title, label: "Book Title" %>
+				<%= f.input :description %>
+				<%= f.input :author %>
+				<%= f.button :submit, :class => "btn-custom2" %>
+			<% end %>
+
+		<% else %>
+
+		<h3>You're not allowed to edit this book</h3>
+
 		<% end %>
 
 	</div>

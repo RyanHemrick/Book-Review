@@ -4,13 +4,21 @@
 
 		<h1>Edit Review</h1>
 
-		<%= simple_form_for([@book, @review]) do |f| %>
-			<div id="rating-form">
-				<label>Rating</label>
-			</div>
-			<%= f.input :comment %>
-			<%= f.button :submit, :class => "btn-custom2" %>
-		<% end %>	
+		<% if @review.user_id == current_user.id %>
+
+			<%= simple_form_for([@book, @review]) do |f| %>
+				<div id="rating-form">
+					<label>Rating</label>
+				</div>
+				<%= f.input :comment %>
+				<%= f.button :submit, :class => "btn-custom2" %>
+			<% end %>	
+
+		<% else %>
+
+		<h3>You're not allowed to edit this review</h3>
+
+		<% end %>
 
 	</div>
 
